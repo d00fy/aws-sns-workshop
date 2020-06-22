@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"boyakidf9c7552": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
