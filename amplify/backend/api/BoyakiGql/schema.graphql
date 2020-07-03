@@ -8,10 +8,26 @@ type Post
   @key(name: "SortByTimestamp", fields:["type", "timestamp"], queryField: "listPostsSortedByTimestamp")
   @key(name: "BySpecificOwner", fields:["owner", "timestamp"], queryField: "listPostsBySpecificOwner")
 {
+  # リクエストに欲しい情報を指定することでレスポンスが拡張されます。
   type: String! # always set to 'post'. used in the SortByTimestamp GSI
   id: ID
   content: String!
   owner: String
   timestamp: AWSTimestamp!
 }
+
+# あるユーザーが他のユーザーをフォローしている状態を保存できるAPI
+type FollowRelationship
+	@model
+	@auth(rules: [
+		{allow: owner, ownerField:"followerId", provider: userPools, operations:[read, create]},
+		{allow: private, provider: userPools, operations:[read]}
+	])
+	@key(fields: ["followeeId", "followerId"])
+{
+	followeeId: ID!
+	followerId: ID!
+	timestamp: AWSTimestamp!
+}
+
 
