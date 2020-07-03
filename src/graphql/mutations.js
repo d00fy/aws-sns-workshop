@@ -79,3 +79,60 @@ export const deleteFollowRelationship = /* GraphQL */ `
     }
   }
 `;
+export const updateTimeline = /* GraphQL */ `
+  mutation UpdateTimeline(
+    $input: UpdateTimelineInput!
+    $condition: ModelTimelineConditionInput
+  ) {
+    updateTimeline(input: $input, condition: $condition) {
+      userId
+      timestamp
+      postId
+      post {
+        type
+        id
+        content
+        owner
+        timestamp
+      }
+    }
+  }
+`;
+export const deleteTimeline = /* GraphQL */ `
+  mutation DeleteTimeline(
+    $input: DeleteTimelineInput!
+    $condition: ModelTimelineConditionInput
+  ) {
+    deleteTimeline(input: $input, condition: $condition) {
+      userId
+      timestamp
+      postId
+      post {
+        type
+        id
+        content
+        owner
+        timestamp
+      }
+    }
+  }
+`;
+export const createTimeline = /* GraphQL */ `
+  mutation CreateTimeline(
+    $input: CreateTimelineInput!
+    $condition: ModelTimelineConditionInput
+  ) {
+    createTimeline(input: $input, condition: $condition) {
+      userId
+      timestamp
+      postId
+      post {
+        type
+        id
+        content
+        owner
+        timestamp
+      }
+    }
+  }
+`;

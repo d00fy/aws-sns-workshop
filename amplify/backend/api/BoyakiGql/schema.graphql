@@ -30,4 +30,18 @@ type FollowRelationship
 	timestamp: AWSTimestamp!
 }
 
-
+# Timelineテーブルを作成し、特定のユーザーがフォローしているユーザーのポストにアクセスできるようにしましょう。
+# TimelineApiの役割は、あるユーザのpostを、そのフォロワのTimelineに複製することで各ユーザ固有のTimelineを実現すること。
+type Timeline 
+	@model
+	@auth(rules: [
+      {allow: owner, ownerField: "userId", provider: userPools, operations:[read, create]},
+      {allow: private, provider: iam ,operations:[create]},
+	])
+	@key(fields: ["userId", "timestamp"])
+{
+	userId: ID!
+	timestamp: AWSTimestamp!
+	postId: ID!
+	post: Post @connection(fields: ["postId"])
+}
